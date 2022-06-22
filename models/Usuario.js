@@ -25,7 +25,20 @@ const UsuarioSchema = Schema({
   distrito: {
     type: String,
     require: true
+  },
+  rol: {
+    type: String,
+    require: true
+  },
+  calificacion: {
+    type: Number,
+    require: false
   }
-})
+});
 
-module.exports = model('Usuario', UsuarioSchema);
+const Usuario = model("Usuario", UsuarioSchema);
+
+module.exports = {
+  UsuarioSchema,
+  Usuario
+};
