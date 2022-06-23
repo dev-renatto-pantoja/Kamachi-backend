@@ -1,5 +1,5 @@
 const { response } = require('express');
-const {Servicio} = require("../models/Servicio");
+const Servicio = require("../models/Servicio");
 
 const listServices = async (req, res = response) => {
     let services = [];

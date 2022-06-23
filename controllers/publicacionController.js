@@ -1,5 +1,5 @@
 const {response} = require("express");
-const {Publicacion} = require("../models/Publicacion");
+const Publicacion = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
     try {

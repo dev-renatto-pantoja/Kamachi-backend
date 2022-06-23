@@ -12,9 +12,4 @@ const ServicioSchema = new Schema({
     }
 });
 
-const Servicio = model("Servicio", ServicioSchema);
-
-module.exports = {
-    ServicioSchema,
-    Servicio
-};
+module.exports = model("Servicio", ServicioSchema);

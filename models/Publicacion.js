@@ -22,9 +22,4 @@ const PublicacionSchema = new Schema({
     },
 });
 
-const Publicacion = model("Publicacion", PublicacionSchema);
-
-module.exports = {
-    PublicacionSchema,
-    Publicacion
-};
+module.exports = model("Publicacion", PublicacionSchema);
