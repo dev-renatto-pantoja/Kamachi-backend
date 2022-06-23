@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const router = Router();
-const {updateInfo, publishService, deletePublication} = require("../controllers/publicacionController");
+const {updateInfo, publishService, deletePublication, listPublications, listPublicationsByService} = require("../controllers/publicacionController");
 const {check} = require("express-validator");
 const {validarCampos} = require("../middlewares/validar-campos");
 
@@ -33,6 +33,20 @@ router.delete(
         validarCampos
     ],
     deletePublication
+);
+
+router.get(
+    '/listarPublicaciones',
+    listPublications
+);
+
+router.get(
+    '/listarPublicacionesPorServicio',
+    [
+        check('name', 'El nombre del servicio es obligatorio').exists,
+        validarCampos
+    ],
+    listPublicationsByService
 );
 
 module.exports = router;

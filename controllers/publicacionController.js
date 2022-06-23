@@ -1,6 +1,5 @@
 const {response} = require("express");
 const Usuario = require("../models/Usuario");
-const Servicio = require("../models/Servicio");
 const Publicacion = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
@@ -71,8 +70,47 @@ const deletePublication = async (req, res = response) => {
     }
 }
 
+const listPublications = async (req, res = response) => {
+    try {
+        let publications = [];
+        publications = await Publicacion.find();
+        if (null != publications) {
+            return res.json({
+                ok: true,
+                publicaciones: publications
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudieron listar las publicaciones"
+        })
+    }
+}
+
+const listPublicationsByService = async (req, res = response) => {
+    try {
+        const {name} = req.body;
+        let publications = [];
+        publications = await Publicacion.find({name});
+        if (null != publications) {
+            return res.json({
+                ok: true,
+                publicaciones: publications
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudieron listar las publicaciones por servicio"
+        })
+    }
+}
+
 module.exports = {
     updateInfo,
     publishService,
-    deletePublication
+    deletePublication,
+    listPublications,
+    listPublicationsByService
 };
