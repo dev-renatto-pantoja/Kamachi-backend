@@ -1,5 +1,5 @@
 const { response } = require('express');
-const Servicio = require("../models/Servicio");
+const {Servicio} = require("../models/Servicio");
 
 const listServices = async (req, res = response) => {
     try {
@@ -19,6 +19,63 @@ const listServices = async (req, res = response) => {
     }
 }
 
+const findService = async (req, res = response) => {
+    try {
+        const {nombre} = req.body;
+        let service = await Servicio.findOne({nombre});
+        if (null != service) {
+            return res.json({
+                ok: true,
+                servicio: service
+            })
+        }
+    } catch (error){
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo encontrar el servicio"
+        })
+    }
+}
+
+const removeService = async (req, res = response) => {
+    try {
+        const {nombre} = req.body;
+        let service = await Servicio.findOne({nombre});
+        if (null != service) {
+            service.remove();
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo eliminar el servicio"
+        })
+    }
+}
+
+const updateInfo = async (req, res = response) => {
+    try {
+        const {sector, nombre} = req.body;
+        let service = await Servicio.findOne({nombre});
+        if (null != service){
+            service.service = service;
+            service.nombre = nombre;
+            await service.save();
+            return res.json({
+                ok: true,
+                servicio: service
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo actualizar la servicio"
+        })
+    }
+}
+
 module.exports = {
-    listServices
+    listServices,
+    findService,
+    removeService,
+    updateInfo
 };
