@@ -17,12 +17,12 @@ router.patch(
 
 router.post(
     '/publicar',
-    [
+    /* [
         check('email', 'El email es obligatorio').isEmail(),
-        check('nombre', 'El nombre del servicio es obligatorio').exists,
-        check('costo', 'El costo es obligatorio').exists,
+        check('nombre', 'El nombre del servicio es obligatorio'),
+        check('costo', 'El costo es obligatorio'),
         validarCampos
-    ],
+    ] */
     publishService
 );
 
