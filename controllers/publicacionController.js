@@ -26,14 +26,10 @@ const updateInfo = async (req, res = response) => {
 }
 
 const publishService = async (req, res = response) => {
-    console.log("llego al metodo");
     try {
         const { email, nombre, costo } = req.body;
-        console.log(`paso body ${email} - ${nombre} - ${costo}`);
         let user = await Usuario.findOne({ email });
-        console.log(`encontro Usuario - ${user}`)
         let service = await Servicio.findOne({ nombre });
-        console.log(`encontro Servicio - ${service}`)
         if (null != user && null != service && user.rol === "vendedor") {
             const publishDate = new Date().toLocaleDateString();
             const publication = new Publicacion({
@@ -76,7 +72,6 @@ const deletePublication = async (req, res = response) => {
 }
 
 const listPublications = async (req, res = response) => {
-    console.log("Antes de listar");
     try {
         let publications = [];
         publications = await Publicacion.find();
@@ -113,10 +108,29 @@ const listPublicationsByService = async (req, res = response) => {
     }
 }
 
+const findPublication = async (req, res = response) => {
+    try {
+        const {email} = req.body;
+        let publication = await Publicacion.findOne({email});
+        if (null != publication) {
+            return res.json({
+                ok: true,
+                publicacion: publication
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo encontrar la publicacion"
+        })
+    }
+}
+
 module.exports = {
     updateInfo,
     publishService,
     deletePublication,
     listPublications,
-    listPublicationsByService
+    listPublicationsByService,
+    findPublication
 };
