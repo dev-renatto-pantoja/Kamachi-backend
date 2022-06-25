@@ -1,5 +1,6 @@
 const { response } = require("express");
 const { Usuario } = require("../models/Usuario");
+const { Servicio } = require("../models/Servicio");
 const Publicacion = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
@@ -32,7 +33,7 @@ const publishService = async (req, res = response) => {
         let user = await Usuario.findOne({ email });
         console.log(`encontro Usuario - ${user}`)
         let service = await Servicio.findOne({ nombre });
-        console.log(`encontro Usuario - ${user}`)
+        console.log(`encontro Servicio - ${service}`)
         if (null != user && null != service && user.rol === "vendedor") {
             const publishDate = new Date().getDate();
             const publication = new Publicacion({
