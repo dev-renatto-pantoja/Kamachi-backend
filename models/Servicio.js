@@ -1,4 +1,4 @@
-const {Schema, model} = require("mongoose");
+const { Schema, model } = require("mongoose");
 
 const ServicioSchema = new Schema({
     sector: {
@@ -12,4 +12,5 @@ const ServicioSchema = new Schema({
     }
 });
 
-module.exports = model("Servicio", ServicioSchema);
+const Servicio = model("Servicio", ServicioSchema);
+module.exports = { Servicio, ServicioSchema };
