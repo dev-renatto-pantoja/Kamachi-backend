@@ -25,11 +25,14 @@ const updateInfo = async (req, res = response) => {
 }
 
 const publishService = async (req, res = response) => {
-    /* try {
+    try {
         const { email, nombre, costo } = req.body;
+        console.log(`paso body ${email} - ${nombre} - ${costo}`);
         let user = await Usuario.findOne({ email });
+        console.log(`encontro Usuario - ${user}`)
         let service = await Servicio.findOne({ nombre });
-        if (null != user && null != service && user.rol === "Contratante") {
+        console.log(`encontro Usuario - ${user}`)
+        if (null != user && null != service && user.rol === "Vendedor") {
             const publishDate = new Date().getDate();
             const publication = new Publicacion({
                 usuario: user,
@@ -48,7 +51,7 @@ const publishService = async (req, res = response) => {
             ok: false,
             msg: "No se pudo publicar el servicio"
         })
-    } */
+    }
 }
 
 const deletePublication = async (req, res = response) => {
