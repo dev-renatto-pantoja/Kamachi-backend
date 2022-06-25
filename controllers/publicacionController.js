@@ -25,7 +25,7 @@ const updateInfo = async (req, res = response) => {
 }
 
 const publishService = async (req, res = response) => {
-    try {
+    /* try {
         const { email, nombre, costo } = req.body;
         let user = await Usuario.findOne({ email });
         let service = await Servicio.findOne({ nombre });
@@ -48,7 +48,7 @@ const publishService = async (req, res = response) => {
             ok: false,
             msg: "No se pudo publicar el servicio"
         })
-    }
+    } */
 }
 
 const deletePublication = async (req, res = response) => {
