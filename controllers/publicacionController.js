@@ -58,8 +58,8 @@ const publishService = async (req, res = response) => {
 
 const deletePublication = async (req, res = response) => {
     try {
-        const { email } = req.body;
-        let publication = await Publicacion.findOne({ email });
+        const { id } = req.body;
+        let publication = await Publicacion.findOne({ id });
         if (null != publication) {
             await publication.remove();
             return res.json({

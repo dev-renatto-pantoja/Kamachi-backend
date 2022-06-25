@@ -29,7 +29,7 @@ router.post(
 router.delete(
     '/eliminarPublicacion',
     [
-        check('email', 'El email es obligatorio').isEmail(),
+        check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
     deletePublication
