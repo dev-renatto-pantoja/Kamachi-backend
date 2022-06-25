@@ -18,6 +18,8 @@ router.post(
   '/registro',
   [
     check('nombre', 'El nombre es obligatorio').not().isEmpty(),
+    check('rol','El rol es obligatorio').not().isEmpty(),
+    check('distrito','El distrito es obligatorio').not().isEmpty(),
     check('email', 'El email es obligatorio').isEmail(),
     check('password', 'El password es obligatorio').isLength({ min: 6 }),
     validarCampos
