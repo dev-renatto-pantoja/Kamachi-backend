@@ -1,16 +1,16 @@
 const { Schema, model } = require("mongoose");
-const { Usuario } = require("./Usuario");
-const { Servicio } = require("./Servicio");
+const { UsuarioSchema } = require("./Usuario");
+const { ServicioSchema } = require("./Servicio");
 
 const PublicacionSchema = new Schema({
-    /* usuario: {
-        type: Usuario,
+    usuario: {
+        type: UsuarioSchema,
         required: true
     },
     servicio: {
-        type: Servicio,
+        type: ServicioSchema,
         required: true
-    }, */
+    },
     fecha_publicacion: {
         type: Date,
         required: true

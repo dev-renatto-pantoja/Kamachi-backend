@@ -1,5 +1,5 @@
 const { response } = require("express");
-const Usuario = require("../models/Usuario");
+const { Usuario } = require("../models/Usuario");
 const Publicacion = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
@@ -25,6 +25,7 @@ const updateInfo = async (req, res = response) => {
 }
 
 const publishService = async (req, res = response) => {
+    console.log("llego al metodo");
     try {
         const { email, nombre, costo } = req.body;
         console.log(`paso body ${email} - ${nombre} - ${costo}`);
