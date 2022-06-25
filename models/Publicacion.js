@@ -11,7 +11,6 @@ const PublicacionSchema = new Schema({
         type: ServicioSchema,
         required: true
     },
-
     fecha_publicacion: {
         type: Date,
         required: true
@@ -19,7 +18,7 @@ const PublicacionSchema = new Schema({
     costo: {
         type: Number,
         required: true
-    },
+    }
 });
 
 module.exports = model("Publicacion", PublicacionSchema);
