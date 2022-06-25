@@ -33,7 +33,7 @@ const publishService = async (req, res = response) => {
         console.log(`encontro Usuario - ${user}`)
         let service = await Servicio.findOne({ nombre });
         console.log(`encontro Usuario - ${user}`)
-        if (null != user && null != service && user.rol === "Vendedor") {
+        if (null != user && null != service && user.rol === "vendedor") {
             const publishDate = new Date().getDate();
             const publication = new Publicacion({
                 usuario: user,
