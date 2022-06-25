@@ -35,7 +35,7 @@ const publishService = async (req, res = response) => {
         let service = await Servicio.findOne({ nombre });
         console.log(`encontro Servicio - ${service}`)
         if (null != user && null != service && user.rol === "vendedor") {
-            const publishDate = new Date().getDate();
+            const publishDate = new Date().toLocaleDateString();
             const publication = new Publicacion({
                 usuario: user,
                 servicio: service,
