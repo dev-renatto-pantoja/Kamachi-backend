@@ -1,13 +1,13 @@
-const {response} = require("express");
+const { response } = require("express");
 const Usuario = require("../models/Usuario");
 const Publicacion = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
     try {
-        const {email, nombre, costo} = req.body;
-        let publication = await Publicacion.findOne({email});
-        let service = await Servicio.findOne({nombre});
-        if (null != publication && null != service){
+        const { email, nombre, costo } = req.body;
+        let publication = await Publicacion.findOne({ email });
+        let service = await Servicio.findOne({ nombre });
+        if (null != publication && null != service) {
             publication.servicio = service;
             publication.costo = costo
             await publication.save();
@@ -26,10 +26,10 @@ const updateInfo = async (req, res = response) => {
 
 const publishService = async (req, res = response) => {
     try {
-        const {email, nombre, costo} = req.body;
-        let user = await Usuario.findOne({email});
-        let service = await Servicio.findOne({nombre});
-        if (null != user && null != service && user.rol === "Contratante"){
+        const { email, nombre, costo } = req.body;
+        let user = await Usuario.findOne({ email });
+        let service = await Servicio.findOne({ nombre });
+        if (null != user && null != service && user.rol === "Contratante") {
             const publishDate = new Date().getDate();
             const publication = new Publicacion({
                 usuario: user,
@@ -53,8 +53,8 @@ const publishService = async (req, res = response) => {
 
 const deletePublication = async (req, res = response) => {
     try {
-        const {email} = req.body;
-        let publication = await Publicacion.findOne({email});
+        const { email } = req.body;
+        let publication = await Publicacion.findOne({ email });
         if (null != publication) {
             await publication.remove();
             return res.json({
@@ -71,6 +71,7 @@ const deletePublication = async (req, res = response) => {
 }
 
 const listPublications = async (req, res = response) => {
+    console.log("Antes de listar");
     try {
         let publications = [];
         publications = await Publicacion.find();
@@ -90,9 +91,9 @@ const listPublications = async (req, res = response) => {
 
 const listPublicationsByService = async (req, res = response) => {
     try {
-        const {name} = req.body;
+        const { name } = req.body;
         let publications = [];
-        publications = await Publicacion.find({name});
+        publications = await Publicacion.find({ name });
         if (null != publications) {
             return res.json({
                 ok: true,
