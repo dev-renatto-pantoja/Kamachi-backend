@@ -11,7 +11,7 @@ router.post(
         check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    createContract()
+    createContract
 );
 
 module.exports = router;
