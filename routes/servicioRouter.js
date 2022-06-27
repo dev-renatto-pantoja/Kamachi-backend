@@ -1,11 +1,11 @@
 const { Router } = require('express');
 const router = Router();
-const {listServices, createService, findService, removeService, updateInfo} = require("../controllers/servicioController");
-const {check} = require("express-validator");
-const {validarCampos} = require("../middlewares/validar-campos");
+const { listServices, createService, findService, removeService, updateInfo } = require("../controllers/servicioController");
+const { check } = require("express-validator");
+const { validarCampos } = require("../middlewares/validar-campos");
 
 router.get(
-  '/listarServicios',
+    '/listarServicios',
     listServices
 );
 
@@ -16,7 +16,7 @@ router.post(
         check('nombre', 'El nombre es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    createService()
+    createService
 );
 
 router.get(
