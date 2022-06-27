@@ -1,16 +1,18 @@
 const { response } = require("express");
 const { Usuario } = require("../models/Usuario");
 const { Servicio } = require("../models/Servicio");
-const Publicacion = require("../models/Publicacion");
+const {Publicacion} = require("../models/Publicacion");
+const {createPayment} = require("./pagoController");
 
 const updateInfo = async (req, res = response) => {
     try {
-        const { email, nombre, costo } = req.body;
+        const { email, sector, nombre, costo, realizado } = req.body;
         let publication = await Publicacion.findOne({ email });
-        let service = await Servicio.findOne({ nombre });
-        if (null != publication && null != service) {
-            publication.servicio = service;
-            publication.costo = costo
+        if (null != publication) {
+            publication.servicio.sector = sector;
+            publication.servicio.nombre = nombre;
+            publication.pago.costo = costo;
+            publication.pago.realizado = realizado;
             await publication.save();
             return res.json({
                 ok: true,
@@ -32,11 +34,13 @@ const publishService = async (req, res = response) => {
         let service = await Servicio.findOne({ nombre });
         if (null != user && null != service && user.rol === "vendedor") {
             const publishDate = new Date().toLocaleDateString();
+            const realizado = false;
+            const payment = createPayment(costo, realizado);
             const publication = new Publicacion({
                 usuario: user,
                 servicio: service,
-                fecha_publicacion: publishDate,
-                costo: costo
+                pago: payment,
+                fecha_publicacion: publishDate
             });
             await publication.save();
             return res.json({
@@ -54,8 +58,8 @@ const publishService = async (req, res = response) => {
 
 const deletePublication = async (req, res = response) => {
     try {
-        const { id } = req.body;
-        let publication = await Publicacion.findOne({ id });
+        const { email } = req.body;
+        let publication = await Publicacion.findOne({ email });
         if (null != publication) {
             await publication.remove();
             return res.json({

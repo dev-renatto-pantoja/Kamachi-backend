@@ -1,6 +1,7 @@
 const { Schema, model } = require("mongoose");
 const { UsuarioSchema } = require("./Usuario");
 const { ServicioSchema } = require("./Servicio");
+const {PagoSchema} = require("./Pago");
 
 const PublicacionSchema = new Schema({
     usuario: {
@@ -15,10 +16,12 @@ const PublicacionSchema = new Schema({
         type: Date,
         required: true
     },
-    costo: {
-        type: Number,
+    pago: {
+        type: PagoSchema,
         required: true
     }
 });
 
-module.exports = model("Publicacion", PublicacionSchema);
+const Publicacion = model("Publicacion", PublicacionSchema);
+
+module.exports = {Publicacion, PublicacionSchema};

@@ -19,6 +19,28 @@ const listServices = async (req, res = response) => {
     }
 }
 
+const createService = async (req, res = response) => {
+    try {
+        const {sector, nombre} = req.body;
+        if (null == Servicio.findOne({nombre})) {
+            let service = new Servicio({
+                sector: sector,
+                nombre: nombre
+            });
+            await service.save();
+            return res.json({
+                ok: true,
+                servicio: service
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo crear el pago"
+        })
+    }
+}
+
 const findService = async (req, res = response) => {
     try {
         const {nombre} = req.body;
@@ -75,6 +97,7 @@ const updateInfo = async (req, res = response) => {
 
 module.exports = {
     listServices,
+    createService,
     findService,
     removeService,
     updateInfo

@@ -32,7 +32,8 @@ const UsuarioSchema = Schema({
   },
   calificacion: {
     type: Number,
-    require: false
+    require: false,
+    default: null
   }
 });
 
