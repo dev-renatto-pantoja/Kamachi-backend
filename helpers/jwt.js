@@ -1,6 +1,7 @@
 const jwt = require('jsonwebtoken');
 
 const generarJWT = (uid, nombre, rol) => {
+  console.log("generar JWT" + nombre + "-" + rol);
 
   return new Promise((resolve, reject) => {
 
