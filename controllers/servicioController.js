@@ -20,6 +20,7 @@ const listServices = async (req, res = response) => {
 }
 
 const createService = async (req, res = response) => {
+    console.log("llego a crear");
     try {
         const {sector, nombre} = req.body;
         if (null == Servicio.findOne({nombre})) {
