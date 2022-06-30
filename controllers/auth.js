@@ -77,7 +77,7 @@ const loginUser = async (req, res = response) => {
       ok: true,
       uid: usuario.id,
       nombre: usuario.nombre,
-      rol:usuario.rol,
+      rol: usuario.rol,
       token
     })
 
@@ -101,6 +101,7 @@ const revalidarToken = async (req, res = response) => {
     ok: true,
     uid,
     nombre,
+    rol,
     token
   })
 }
