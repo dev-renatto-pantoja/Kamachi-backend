@@ -1,7 +1,6 @@
 const { Schema, model } = require("mongoose");
 const { UsuarioSchema } = require("./Usuario");
 const { ServicioSchema } = require("./Servicio");
-const {PagoSchema} = require("./Pago");
 
 const PublicacionSchema = new Schema({
     usuario: {
@@ -16,8 +15,8 @@ const PublicacionSchema = new Schema({
         type: Date,
         required: true
     },
-    pago: {
-        type: PagoSchema,
+    monto: {
+        type: Number,
         required: true
     }
 });

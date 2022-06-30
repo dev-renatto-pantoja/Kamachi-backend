@@ -10,8 +10,7 @@ router.patch(
         check('email', 'El email es obligatorio').isEmail(),
         check('sector', 'El sector del servicio es obligatorio').not().isEmpty(),
         check('nombre', 'El nombre del servicio es obligatorio').not().isEmpty(),
-        check('costo', 'El costo es obligatorio').not().isEmpty(),
-        check('realizado', 'El realizado es obligatorio').not().isEmpty(),
+        check('monto', 'El monto es obligatorio').not().isEmpty(),
         validarCampos
     ],
     updateInfo
@@ -22,7 +21,7 @@ router.post(
     [
         check('email', 'El email es obligatorio').isEmail(),
         check('nombre', 'El nombre del servicio es obligatorio').not().isEmpty(),
-        check('costo', 'El costo es obligatorio').not().isEmpty(),
+        check('monto', 'El monto es obligatorio').not().isEmpty(),
         validarCampos
     ],
     publishService
