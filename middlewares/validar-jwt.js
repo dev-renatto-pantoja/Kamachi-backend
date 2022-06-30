@@ -20,9 +20,6 @@ const validarJWT = (req, res = response, next) => {
       token,
       process.env.SECRET_JWT_SEED
     );
-    console.log("uid: " + uid);
-    console.log("nombre: " + nombre);
-    console.log("rol: " + rol);
     req.uid = uid;
     req.nombre = nombre;
     req.rol = rol;
