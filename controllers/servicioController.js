@@ -30,12 +30,14 @@ const createService = async (req, res = response) => {
                 sector: sector,
                 nombre: nombre
             });
-            
+
             await service.save();
             return res.json({
                 ok: true,
                 servicio: service
             })
+        }else{
+            console.log(Servicio.findOne({nombre}));
         }
     } catch (error) {
         return res.status(400).json({
