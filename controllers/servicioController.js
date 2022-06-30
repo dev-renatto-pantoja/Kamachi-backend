@@ -23,9 +23,8 @@ const createService = async (req, res = response) => {
     console.log("llego a crear");
     try {
         const { sector, nombre } = req.body;
-        console.log(sector, nombre);
-        if (null === Servicio.findOne({ nombre })) {
-            console.log("entro al if");
+        let servicio = await Servicio.findOne({nombre});
+        if (null === servicio) {
             let service = new Servicio({
                 sector: sector,
                 nombre: nombre
@@ -37,14 +36,15 @@ const createService = async (req, res = response) => {
                 servicio: service
             })
         } else {
-            console.log("encontro con nombre")
-            let serv = await Servicio.findOne({ nombre });
-            console.log(serv);
+            return res.json({
+                ok:false,
+                msg:"El servicio ya existe"
+            })
         }
     } catch (error) {
         return res.status(400).json({
             ok: false,
-            msg: "No se pudo crear el pago"
+            msg: "No se pudo crear el servicio"
         })
     }
 }
