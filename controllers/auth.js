@@ -28,12 +28,13 @@ const createUser = async (req, res = response) => {
     await usuario.save();
 
     //Generar JWT
-    const token = await generarJWT(usuario.id, usuario.nombre);
+    const token = await generarJWT(usuario.id, usuario.nombre, usuario.rol);
 
     res.status(201).json({
       ok: true,
       uid: usuario.id,
       nombre: usuario.nombre,
+      rol: usuario.rol,
       token
 
     })
