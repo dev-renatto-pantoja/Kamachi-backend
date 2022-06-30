@@ -38,7 +38,7 @@ const createService = async (req, res = response) => {
             })
         } else {
             console.log("encontro con nombre")
-            const serv = Servicio.findOne({ nombre });
+            let serv = await Servicio.findOne({ nombre });
             console.log(serv);
         }
     } catch (error) {
