@@ -23,11 +23,14 @@ const createService = async (req, res = response) => {
     console.log("llego a crear");
     try {
         const {sector, nombre} = req.body;
-        if (null == Servicio.findOne({nombre})) {
+        console.log(sector,nombre);
+        if (null === Servicio.findOne({nombre})) {
+            console.log("entro al if");
             let service = new Servicio({
                 sector: sector,
                 nombre: nombre
             });
+            
             await service.save();
             return res.json({
                 ok: true,
