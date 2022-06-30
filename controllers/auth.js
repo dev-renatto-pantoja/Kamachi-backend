@@ -102,6 +102,7 @@ const revalidarToken = async (req, res = response) => {
     uid,
     nombre,
     rol,
+    msg:"ok",
     token
   })
 }
