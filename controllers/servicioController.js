@@ -1,5 +1,5 @@
 const { response } = require('express');
-const {Servicio} = require("../models/Servicio");
+const { Servicio } = require("../models/Servicio");
 
 const listServices = async (req, res = response) => {
     try {
@@ -22,9 +22,9 @@ const listServices = async (req, res = response) => {
 const createService = async (req, res = response) => {
     console.log("llego a crear");
     try {
-        const {sector, nombre} = req.body;
-        console.log(sector,nombre);
-        if (null === Servicio.findOne({nombre})) {
+        const { sector, nombre } = req.body;
+        console.log(sector, nombre);
+        if (null === Servicio.findOne({ nombre })) {
             console.log("entro al if");
             let service = new Servicio({
                 sector: sector,
@@ -36,8 +36,10 @@ const createService = async (req, res = response) => {
                 ok: true,
                 servicio: service
             })
-        }else{
-            console.log(Servicio.findOne({nombre}));
+        } else {
+            console.log("encontro con nombre")
+            const serv = Servicio.findOne({ nombre });
+            console.log(serv);
         }
     } catch (error) {
         return res.status(400).json({
@@ -49,15 +51,15 @@ const createService = async (req, res = response) => {
 
 const findService = async (req, res = response) => {
     try {
-        const {nombre} = req.body;
-        let service = await Servicio.findOne({nombre});
+        const { nombre } = req.body;
+        let service = await Servicio.findOne({ nombre });
         if (null != service) {
             return res.json({
                 ok: true,
                 servicio: service
             })
         }
-    } catch (error){
+    } catch (error) {
         return res.status(400).json({
             ok: false,
             msg: "No se pudo encontrar el servicio"
@@ -67,8 +69,8 @@ const findService = async (req, res = response) => {
 
 const removeService = async (req, res = response) => {
     try {
-        const {nombre} = req.body;
-        let service = await Servicio.findOne({nombre});
+        const { nombre } = req.body;
+        let service = await Servicio.findOne({ nombre });
         if (null != service) {
             service.remove();
         }
@@ -82,9 +84,9 @@ const removeService = async (req, res = response) => {
 
 const updateInfo = async (req, res = response) => {
     try {
-        const {sector, nombre} = req.body;
-        let service = await Servicio.findOne({nombre});
-        if (null != service){
+        const { sector, nombre } = req.body;
+        let service = await Servicio.findOne({ nombre });
+        if (null != service) {
             service.service = service;
             service.nombre = nombre;
             await service.save();
