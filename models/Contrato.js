@@ -20,3 +20,4 @@ const ContratoSchema = new Schema({
 const Contrato = model("Contrato", ContratoSchema);
 
 module.exports = {Contrato, ContratoSchema};
+    
