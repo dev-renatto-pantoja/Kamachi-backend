@@ -43,6 +43,9 @@ const removeUser = async (req, res = response) => {
         let user = await Usuario.findOne({email});
         if (null != email) {
             user.remove();
+            return res.json({
+                ok: true,
+            })
         }
     } catch (error) {
         return res.status(400).json({

@@ -59,8 +59,7 @@ const deletePublication = async (req, res = response) => {
         if (null != publication) {
             await publication.remove();
             return res.json({
-                ok: true,
-                publicacion: publication
+                ok: true
             })
         }
     } catch (error) {

@@ -73,6 +73,9 @@ const removeService = async (req, res = response) => {
         let service = await Servicio.findOne({ nombre });
         if (null != service) {
             service.remove();
+            return res.json({
+                ok: true,
+            })
         }
     } catch (error) {
         return res.status(400).json({

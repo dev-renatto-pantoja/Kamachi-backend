@@ -22,9 +22,9 @@ router.patch(
     '/actualizarInfo',
     [
             check('email', 'El email es obligatorio').isEmail(),
-            check('telefono', 'El nombre es obligatorio').exists,
-            check('distrito', 'El distrito es obligatorio').exists,
-            check('rol', 'El rol es obligatorio').exists,
+            check('telefono', 'El nombre es obligatorio').isEmpty(),
+            check('distrito', 'El distrito es obligatorio').isEmpty(),
+            check('rol', 'El rol es obligatorio').isEmpty(),
             validarCampos
     ],
     updateInfo
