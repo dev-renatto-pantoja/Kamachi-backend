@@ -4,11 +4,13 @@ const {PublicacionSchema} = require("./Publicacion");
 
 const HistorialSchema = new Schema({
     usuario: {
-        type: UsuarioSchema,
+        type: Schema.Types.ObjectId,
+        ref: UsuarioSchema,
         require: true,
     },
     publicaciones: [{
-        type: PublicacionSchema,
+        type: Schema.Types.ObjectId,
+        ref: PublicacionSchema,
         require: true,
     }]
 });

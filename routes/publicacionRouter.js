@@ -1,6 +1,6 @@
 const {Router} = require("express");
 const router = Router();
-const {updateInfo, publishService, deletePublication, listPublications, listPublicationsByService, findPublication} = require("../controllers/publicacionController");
+const {updateInfo, publishService, deletePublication, listPublications, listPublicationsBySector, findPublication, mailing} = require("../controllers/publicacionController");
 const {check} = require("express-validator");
 const {validarCampos} = require("../middlewares/validar-campos");
 
@@ -30,7 +30,7 @@ router.post(
 router.delete(
     '/eliminarPublicacion',
     [
-        check('email', 'El email es obligatorio').not().isEmpty(),
+        check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
     deletePublication
@@ -42,21 +42,31 @@ router.get(
 );
 
 router.get(
-    '/listarPublicacionesPorServicio',
+    '/listarPublicacionesPorSector',
     [
-        check('name', 'El nombre del servicio es obligatorio').not().isEmpty(),
+        check('sector', 'El sector del servicio es obligatorio').not().isEmpty(),
         validarCampos
     ],
-    listPublicationsByService
+    listPublicationsBySector
 );
 
 router.get(
     '/buscarPublicacion',
     [
-        check('email', 'El email es obligatorio').not().isEmpty(),
+        check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
     findPublication
+);
+
+router.post(
+    '/mensajear',
+    [
+        check('email', 'El email es obligatorio').isEmail(),
+        check('publicationId', 'El id de publicacion es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    mailing
 );
 
 module.exports = router;

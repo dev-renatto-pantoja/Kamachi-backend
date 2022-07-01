@@ -4,11 +4,13 @@ const { ServicioSchema } = require("./Servicio");
 
 const PublicacionSchema = new Schema({
     usuario: {
-        type: UsuarioSchema,
+        type: Schema.Types.ObjectId,
+        ref: UsuarioSchema,
         required: true
     },
     servicio: {
-        type: ServicioSchema,
+        type: Schema.Types.ObjectId,
+        ref: ServicioSchema,
         required: true
     },
     fecha_publicacion: {

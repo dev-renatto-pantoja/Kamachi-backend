@@ -55,6 +55,7 @@ const removeUser = async (req, res = response) => {
     }
 }
 
+// falta revisar
 const updateInfo = async (req, res = response) => {
     try {
         const {email, telefono, distrito, rol} = req.body;
