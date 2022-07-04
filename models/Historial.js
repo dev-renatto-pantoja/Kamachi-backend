@@ -1,6 +1,6 @@
 const { Schema, model } = require("mongoose");
-const {UsuarioSchema} = require("./Usuario");
-const {PublicacionSchema} = require("./Publicacion");
+const { UsuarioSchema } = require("./Usuario");
+const { PublicacionSchema } = require("./Publicacion");
 
 const HistorialSchema = new Schema({
     usuario: {
