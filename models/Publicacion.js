@@ -18,9 +18,17 @@ const PublicacionSchema = new Schema({
     monto: {
         type: Number,
         required: true
+    },
+    titulo: {
+        type: String,
+        required: true
+    },
+    img: {
+        type: String,
+        required: true
     }
 });
 
 const Publicacion = model("Publicacion", PublicacionSchema);
 
-module.exports = {Publicacion, PublicacionSchema};
+module.exports = { Publicacion, PublicacionSchema };
