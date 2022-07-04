@@ -20,7 +20,6 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/users', require('./routes/usuarioRouter'));
 app.use('/api/services', require('./routes/servicioRouter'));
 app.use('/api/publications', require('./routes/publicacionRouter'));
-//app.use('/api/historicals', require('./routes/historialRouter'));
 
 app.listen(process.env.PORT, () => {
   console.log(`Servidor en puerto ${process.env.PORT}`)

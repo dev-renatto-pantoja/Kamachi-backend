@@ -85,13 +85,12 @@ const removeService = async (req, res = response) => {
     }
 }
 
-// falta revisar
 const updateInfo = async (req, res = response) => {
     try {
         const { sector, nombre } = req.body;
         let service = await Servicio.findOne({ nombre });
         if (null != service) {
-            service.sector = sector;
+            service.service = service;
             service.nombre = nombre;
             await service.save();
             return res.json({
