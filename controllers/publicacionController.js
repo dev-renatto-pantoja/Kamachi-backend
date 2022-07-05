@@ -1,11 +1,11 @@
 const { response } = require("express");
 const { Usuario } = require("../models/Usuario");
 const { Servicio } = require("../models/Servicio");
-const {Publicacion} = require("../models/Publicacion");
+const { Publicacion } = require("../models/Publicacion");
 
 const updateInfo = async (req, res = response) => {
     try {
-        const { email, sector, nombre, monto} = req.body;
+        const { email, sector, nombre, monto } = req.body;
         let publication = await Publicacion.findOne({ email });
         if (null != publication) {
             publication.servicio.sector = sector;
@@ -27,7 +27,7 @@ const updateInfo = async (req, res = response) => {
 
 const publishService = async (req, res = response) => {
     try {
-        const { email, nombre, monto } = req.body;
+        const { email, nombre, monto, titulo, img } = req.body;
         let user = await Usuario.findOne({ email });
         let service = await Servicio.findOne({ nombre });
         if (null != user && null != service && user.rol === "vendedor") {
@@ -36,7 +36,9 @@ const publishService = async (req, res = response) => {
                 usuario: user,
                 servicio: service,
                 monto: monto,
-                fecha_publicacion: publishDate
+                fecha_publicacion: publishDate,
+                titulo: titulo,
+                img: img
             });
             await publication.save();
             return res.json({
@@ -47,7 +49,8 @@ const publishService = async (req, res = response) => {
     } catch (error) {
         return res.status(400).json({
             ok: false,
-            msg: "No se pudo publicar el servicio"
+            msg: "No se pudo publicar el servicio",
+            error: error
         })
     }
 }
@@ -109,8 +112,8 @@ const listPublicationsByService = async (req, res = response) => {
 
 const findPublication = async (req, res = response) => {
     try {
-        const {email} = req.body;
-        let publication = await Publicacion.findOne({email});
+        const { email } = req.body;
+        let publication = await Publicacion.findOne({ email });
         if (null != publication) {
             return res.json({
                 ok: true,
