@@ -105,7 +105,6 @@ const revalidarToken = async (req, res = response) => {
     nombre,
     email,
     rol,
-    msg: "ok",
     token
   })
 }
