@@ -21,10 +21,10 @@ router.get(
 router.patch(
     '/actualizarInfo',
     [
-            check('email', 'El email es obligatorio').isEmail(),
-            check('telefono', 'El nombre es obligatorio').isEmpty(),
-            check('distrito', 'El distrito es obligatorio').isEmpty(),
-            check('rol', 'El rol es obligatorio').isEmpty(),
+            check('email', 'El email es obligatorio').not().isEmail(),
+            check('telefono', 'El nombre es obligatorio').not().isEmpty(),
+            check('distrito', 'El distrito es obligatorio').not().isEmpty(),
+            check('rol', 'El rol es obligatorio').not().isEmpty(),
             validarCampos
     ],
     updateInfo
