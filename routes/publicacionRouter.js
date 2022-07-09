@@ -52,7 +52,7 @@ router.get(
     listPublicationsByService
 );
 
-router.get(
+router.post(
     '/buscarPublicacion',
     [
         check('id', 'El id es obligatorio').not().isEmpty(),
