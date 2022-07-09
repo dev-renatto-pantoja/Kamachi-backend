@@ -1,5 +1,7 @@
 const { response } = require('express');
 const {Usuario} = require("../models/Usuario");
+const {Historial} = require("../models/Historial");
+const {Publicacion} = require("../models/Publicacion");
 
 const listUsers = async (req, res = response) => {
     try {
@@ -77,9 +79,54 @@ const updateInfo = async (req, res = response) => {
     }
 }
 
+const rateUserService = async (req, res = response) => {
+    try {
+        const {email, publicacionId} = req.body;
+        let historical = await Historial.findOne({"usuario.email": email});
+        if (null != historical) {
+            let counter = 0;
+            historical.publicaciones.forEach(element => {
+                if (element._id.toString() === publicacionId) {
+                    counter = 1;
+                }
+            });
+            let publication = await Publicacion.findById(publicacionId);
+            if (counter === 1 && publication.usuario.rol === "vendedor") {
+                let user =  await Usuario.findById(publication.usuario._id.toString());
+                if (null == user.calificacion){
+                    user.calificacion = 10;
+                    await user.save();
+                    return res.json({
+                        ok: true,
+                        mgs: "Se califico al proveedor"
+                    })
+                } else {
+                    user.calificacion = user.calificacion + 10;
+                    await user.save();
+                    return res.json({
+                        ok: true,
+                        mgs: "Se califico al proveedor"
+                    })
+                }
+            }
+        } else {
+            return res.status(400).json({
+                ok: false,
+                mgs: "No existe el historial"
+            })
+        }
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo calificar al proveedor"
+        })
+    }
+}
+
 module.exports = {
     listUsers,
     findUser,
     removeUser,
-    updateInfo
+    updateInfo,
+    rateUserService
 };

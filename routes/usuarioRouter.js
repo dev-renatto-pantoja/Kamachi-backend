@@ -1,6 +1,6 @@
 const { Router } = require('express');
 const router = Router();
-const {listUsers, findUser, removeUser, updateInfo} = require("../controllers/usuarioController");
+const {listUsers, findUser, removeUser, updateInfo, rateUserService} = require("../controllers/usuarioController");
 const {check} = require("express-validator");
 const {validarCampos} = require("../middlewares/validar-campos");
 
@@ -37,6 +37,16 @@ router.delete(
             validarCampos
     ],
     removeUser
+);
+
+router.post(
+    '/calificarUsuario',
+    [
+        check('email', 'El email es obligatorio').isEmail(),
+        check('publicacionId', 'El publicacionId es obligatorio').not().isEmpty(),
+        validarCampos
+    ],
+    rateUserService
 );
 
 module.exports = router;
