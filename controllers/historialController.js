@@ -3,35 +3,25 @@ const { Usuario } = require("../models/Usuario");
 const { Historial } = require("../models/Historial");
 const {Publicacion} = require("../models/Publicacion");
 
-const findHistorical = function (email) {
-    return historical = Historial.findOne({"usuario.email": email});
-}
-const createHistorical = function (email, publicationId) {
-    let user = Usuario.findOne({ email });
-    let publication = Publicacion.findById(publicationId);
-    let hist = new Historial({
-        usuario: user,
-        publicaciones: [publication]
-    });
-    hist.save();
-}
-
-const addHistorical = function (historical, publicationId) {
-    const publication = Publicacion.findById(publicationId);
-    historical.publicaciones.push(publication);
-    historical.save();
-}
-
 const updateHistoricalByUser = async (req, res = response) => {
     try {
         const {email, publicationId} = req.body;
-        const historical = findHistorical(email)
+        let historical = await Historial.findOne({"usuario.email": email});
         if (null != historical) {
-            createHistorical(email, publicationId)
-            return res.json({ok: true})
-        } else {
-            addHistorical(historical, publicationId)
-            return res.json({ok: true})
+            let publication = await Publicacion.findById(publicationId);
+            historical.publicaciones.push(publication);
+            await historical.save();
+            return res.json({ok: true, msg: "La publicacion se añadio al historial"});
+        }
+        if (null == historical) {
+            let user = await Usuario.findOne({ email });
+            let publication = await Publicacion.findById(publicationId);
+            let hist = new Historial({
+                usuario: user,
+                publicaciones: [publication]
+            });
+            await hist.save();
+            return res.json({ok: true, msg: "La creo un historial a partir de la publicacion"});
         }
     } catch (error) {
         return res.status(400).json({
