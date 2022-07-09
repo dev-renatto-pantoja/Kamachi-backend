@@ -1,12 +1,17 @@
 const { Router } = require('express');
 const router = Router();
-const { listServices, createService, findService, removeService, updateInfo } = require("../controllers/servicioController");
+const { listServices, createService, findService, removeService, updateInfo, listSectors } = require("../controllers/servicioController");
 const { check } = require("express-validator");
 const { validarCampos } = require("../middlewares/validar-campos");
 
 router.get(
     '/listarServicios',
     listServices
+);
+
+router.get(
+    '/listarSectores',
+    listSectors
 );
 
 router.post(

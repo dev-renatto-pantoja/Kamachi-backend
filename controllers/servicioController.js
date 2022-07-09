@@ -106,10 +106,20 @@ const updateInfo = async (req, res = response) => {
     }
 }
 
+const listSectors = async (req, res = response) => {
+    Servicio.collection.distinct("sector", function(error, results){
+        return res.json({
+            ok: true,
+            sectores: results
+        })
+    });
+}
+
 module.exports = {
     listServices,
     createService,
     findService,
     removeService,
-    updateInfo
+    updateInfo,
+    listSectors
 };
