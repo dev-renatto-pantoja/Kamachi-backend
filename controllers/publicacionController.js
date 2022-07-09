@@ -2,6 +2,7 @@ const { response } = require("express");
 const { Usuario } = require("../models/Usuario");
 const { Servicio } = require("../models/Servicio");
 const { Publicacion } = require("../models/Publicacion");
+const sendmail = require("sendmail");
 
 const updateInfo = async (req, res = response) => {
     try {
@@ -128,11 +129,37 @@ const findPublication = async (req, res = response) => {
     }
 }
 
+const sendEmail = async (req, res = response) => {
+    try {
+        const {email, id} = req.body;
+        let publication = await Publicacion.findById(id);
+        sendmail({
+            from: email,
+            to: publication.usuario.email,
+            subject: 'Prestación de Servicios',
+            html: 'Estimad@, requiero de su servicio! ',
+        }, function(err, reply) {
+            console.log(err && err.stack);
+            console.dir(reply);
+            return res.json({
+                ok: true,
+                msg: "Se envio el correo"
+            })
+        });
+    } catch (error) {
+        return res.status(400).json({
+            ok: false,
+            msg: "No se pudo enviar el email"
+        })
+    }
+}
+
 module.exports = {
     updateInfo,
     publishService,
     deletePublication,
     listPublications,
     listPublicationsByService,
-    findPublication
+    findPublication,
+    sendEmail
 };
