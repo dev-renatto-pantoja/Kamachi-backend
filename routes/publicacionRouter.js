@@ -30,7 +30,7 @@ router.post(
 router.delete(
     '/eliminarPublicacion',
     [
-        check('email', 'El email es obligatorio').not().isEmpty(),
+        check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
     deletePublication
@@ -44,7 +44,7 @@ router.get(
 router.get(
     '/listarPublicacionesPorServicio',
     [
-        check('name', 'El nombre del servicio es obligatorio').not().isEmpty(),
+        check('sector', 'El sector del servicio es obligatorio').not().isEmpty(),
         validarCampos
     ],
     listPublicationsByService
@@ -53,7 +53,7 @@ router.get(
 router.get(
     '/buscarPublicacion',
     [
-        check('email', 'El email es obligatorio').not().isEmpty(),
+        check('id', 'El id es obligatorio').not().isEmpty(),
         validarCampos
     ],
     findPublication

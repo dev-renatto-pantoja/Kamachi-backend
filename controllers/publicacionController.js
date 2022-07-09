@@ -57,8 +57,8 @@ const publishService = async (req, res = response) => {
 
 const deletePublication = async (req, res = response) => {
     try {
-        const { email } = req.body;
-        let publication = await Publicacion.findOne({ email });
+        const { id } = req.body;
+        let publication = await Publicacion.findById(id);
         if (null != publication) {
             await publication.remove();
             return res.json({
@@ -93,9 +93,9 @@ const listPublications = async (req, res = response) => {
 
 const listPublicationsByService = async (req, res = response) => {
     try {
-        const { name } = req.body;
+        const { sector } = req.body;
         let publications = [];
-        publications = await Publicacion.find({ name });
+        publications = await Publicacion.find({ sector });
         if (null != publications) {
             return res.json({
                 ok: true,
@@ -112,8 +112,8 @@ const listPublicationsByService = async (req, res = response) => {
 
 const findPublication = async (req, res = response) => {
     try {
-        const { email } = req.body;
-        let publication = await Publicacion.findOne({ email });
+        const { id } = req.body;
+        let publication = await Publicacion.findById(id);
         if (null != publication) {
             return res.json({
                 ok: true,
