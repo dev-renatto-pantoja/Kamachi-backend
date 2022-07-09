@@ -95,7 +95,7 @@ const listPublicationsByService = async (req, res = response) => {
     try {
         const { sector } = req.body;
         let publications = [];
-        publications = await Publicacion.find({ sector });
+        publications = await Publicacion.find({ "service.sector": sector });
         if (null != publications) {
             return res.json({
                 ok: true,
