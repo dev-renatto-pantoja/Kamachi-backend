@@ -22,6 +22,8 @@ router.post(
         check('email', 'El email es obligatorio').isEmail(),
         check('nombre', 'El nombre del servicio es obligatorio').not().isEmpty(),
         check('monto', 'El monto es obligatorio').not().isEmpty(),
+        check('titulo', 'El titulo es obligatorio').not().isEmpty(),
+        check('img', 'La img es obligatoria').not().isEmpty(),
         validarCampos
     ],
     publishService
