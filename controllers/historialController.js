@@ -51,6 +51,11 @@ const findHistoricalByUser = async (req, res = response) => {
                 ok: true,
                 historial: historical
             })
+        } else {
+            return res.json({
+                ok: true,
+                msg: "Historial vacio"
+            })
         }
     } catch (error) {
         return res.status(400).json({
