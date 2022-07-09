@@ -90,7 +90,7 @@ const updateInfo = async (req, res = response) => {
         const { sector, nombre } = req.body;
         let service = await Servicio.findOne({ nombre });
         if (null != service) {
-            service.service = service;
+            service.sector = sector;
             service.nombre = nombre;
             await service.save();
             return res.json({
