@@ -4,7 +4,7 @@ const {updateHistoricalByUser, findHistoricalByUser} = require("../controllers/h
 const {check} = require("express-validator");
 const {validarCampos} = require("../middlewares/validar-campos");
 
-router.get(
+router.post(
     '/buscaHistorialPorUsuario',
     [
         check('email', 'El email es obligatorio').isEmail(),
