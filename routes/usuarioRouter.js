@@ -9,7 +9,7 @@ router.get(
     listUsers
 );
 
-router.get(
+router.post(
     '/buscarUsuario',
     [
         check('email', 'El email es obligatorio').isEmail(),
