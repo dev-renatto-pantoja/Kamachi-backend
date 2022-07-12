@@ -18,7 +18,7 @@ router.post(
     findUser
 );
 
-router.patch(
+router.post(
     '/actualizarInfo',
     [
             check('email', 'El email es obligatorio').isEmail(),
